@@ -18,12 +18,12 @@ void WeekendBonus::OnUpdate(uint32 diff)
 
         if ((localtime(&LocalTime)->tm_wday == Day::FRIDAY && localtime(&LocalTime)->tm_hour >= 18) && !Triggered)
         {
-            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses!");
+            sWorld->SendServerMessage(SERVER_MSG_STRING, "周末经验翻倍活动开始啦！");
             SetRates(true);
         }
         else if (localtime(&LocalTime)->tm_wday == Day::MONDAY && Triggered)
         {
-            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
+            sWorld->SendServerMessage(SERVER_MSG_STRING, "周末经验翻倍活动已结束。");
             SetRates(false);
         }
 
@@ -35,7 +35,7 @@ void WeekendBonus::OnUpdate(uint32 diff)
         AnnouncementTime += Milliseconds(diff);
         if (AnnouncementTime > AnnouncementFrequency)
         {
-            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is active, granting you bonuses!");
+            sWorld->SendServerMessage(SERVER_MSG_STRING, "周末经验翻倍活动已激活！");
             AnnouncementTime = 0s;
         }
     }
