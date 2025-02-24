@@ -1,9 +1,6 @@
 #ifndef MOD_WEEKENDBONUS_H
 #define MOD_WEEKENDBONUS_H
 
-#include "Chat.h"
-#include "Config.h"
-#include "Player.h"
 #include "ScriptMgr.h"
 
 enum Day
@@ -17,10 +14,13 @@ enum Day
     SATURDAY
 };
 
-class WeekendBonus : public WorldScript
+class WeekendBonus : public PlayerScript, WorldScript
 {
 public:
     WeekendBonus();
+
+    // PlayerScript
+    void OnPlayerLogin(Player* /*player*/) override;
 
     // WorldScript
     void OnAfterConfigLoad(bool /*reload*/) override;
@@ -30,6 +30,7 @@ public:
 private:
     void LoadDefaultValues();
     void SetRates(bool /*active*/);
+    bool HasActiveMultipliers();
 
     bool Triggered;
     time_t LocalTime;
